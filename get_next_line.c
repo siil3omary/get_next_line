@@ -9,19 +9,17 @@ char *readed_buf;
 
 readed_buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 if (!readed_buf)
-{
 	return (NULL);
-}
 
 while (1 != 2)
 {
 	read_byte = read(fd, readed_buf, BUFFER_SIZE);
 	if (read_byte == -1)
 		return (NULL);
-	read_buffer[read_byte] = '\0';
+	readed_buf[read_byte] = '\0';
 	if (read_byte == 0)
 		break;
-	buf = ft_strjoin(buf , readed_buf);
+buf = ft_strjoin(buf , readed_buf);
 	if (isnewline(buf))
 		break;
 	
@@ -40,9 +38,7 @@ char *extract_line(char *buf)
 	int i;
 	i = 0;
 	if (!buf || ft_strlen(buf) == 0)
-	{
 		return (NULL);
-	}
 	while (buf[i] && buf[i] != '\n')
 	i++;
 
@@ -55,12 +51,15 @@ char *new_buf(char *buf)
 {
 	char *new;
 	int buf_lenght;
+	int i;
+
 	if (!buf)
 	{
 		return (NULL);
 	}
 	
 	buf_lenght = ft_strlen(buf);
+	i = 0;
 		while (buf[i] && buf[i] != '\n')
 		i++;
 		buf_lenght = i;
@@ -87,7 +86,7 @@ if(fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 
 
 
-buf = read_buff(fd , buf);
+buf = read_buffer(fd , buf);
 if(!buf)
 return (NULL);
 line = extract_line(buf);
