@@ -6,7 +6,7 @@
 /*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:18:29 by aelomari          #+#    #+#             */
-/*   Updated: 2023/12/02 15:35:11 by aelomari         ###   ########.fr       */
+/*   Updated: 2023/12/02 15:37:49 by aelomari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,15 @@ if(fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 
 
 buf = read_buffer(fd , buf);
-if (buf != NULL) {
+if (buf == NULL) {
     free(buf);
 return NULL;
 }
 line = extract_line(buf);
+if (line == NULL) {
+    free(line);
+return NULL;
+}
 buf = new_buf(buf);
 
 
