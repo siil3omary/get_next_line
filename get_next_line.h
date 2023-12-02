@@ -6,7 +6,7 @@
 /*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:18:27 by aelomari          #+#    #+#             */
-/*   Updated: 2023/12/02 14:46:52 by aelomari         ###   ########.fr       */
+/*   Updated: 2023/12/02 16:11:35 by aelomari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 #ifndef BUFFER_SIZE
-#define BUFFER_SIZE 10000
+#define BUFFER_SIZE 1
 #endif
 
 char *get_next_line(int fd);

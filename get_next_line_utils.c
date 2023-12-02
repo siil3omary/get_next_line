@@ -6,7 +6,7 @@
 /*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:18:32 by aelomari          #+#    #+#             */
-/*   Updated: 2023/12/02 14:20:08 by aelomari         ###   ########.fr       */
+/*   Updated: 2023/12/02 15:58:00 by aelomari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		len = str_len - start;
 	ptr = (char *)malloc(len + 1);
 	if (!ptr)
+	{
+		free(ptr);
 		return (NULL);
+	}
 	i = 0;
 	while (i < len && s[start + i])
 	{

@@ -6,7 +6,7 @@
 /*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:18:29 by aelomari          #+#    #+#             */
-/*   Updated: 2023/12/02 15:37:49 by aelomari         ###   ########.fr       */
+/*   Updated: 2023/12/02 16:09:31 by aelomari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 
 char *read_buffer(int fd ,char *buf)
 {
-int read_byte;
-char *readed_buf;
-
-
+    int read_byte;
+    char *readed_buf;
+    char *tmp;
 
     readed_buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
     if (!readed_buf) {
@@ -26,31 +25,28 @@ char *readed_buf;
         return (NULL);
     }
 
-while (1 != 2)
-{
-	read_byte = read(fd, readed_buf, BUFFER_SIZE);
-	if (read_byte == -1)
-	{
-		  free(readed_buf);
-		return (NULL);	
-	}
+    while (1 != 2)
+    {
+        read_byte = read(fd, readed_buf, BUFFER_SIZE);
+        if (read_byte == -1)
+        {
+            free(readed_buf);
+            return (NULL);    
+        }
 
-	readed_buf[read_byte] = '\0';
-	if (read_byte == 0)
-		break;
-buf = ft_strjoin(buf , readed_buf);
+        readed_buf[read_byte] = '\0';
+        if (read_byte == 0)
+            break;
+        tmp = ft_strjoin(buf , readed_buf);
+        free(buf);
+        buf = tmp;
 
+        if (isnewline(buf))
+            break;
+    }
 
-	if (isnewline(buf))
-		break;
-	
-}
-
-free(readed_buf);
-return (buf);
-
-
-
+    free(readed_buf);
+    return buf;
 }
 
 char *extract_line(char *buf)
@@ -106,27 +102,25 @@ char *new_buf(char *buf)
 
 char *get_next_line(int fd)
 {
- char *line = NULL;
-
-static char *buf = NULL;
-
-if(fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-	return (NULL);
+    char *line = NULL;
+    static char *buf = NULL;
 
 
+    if(fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+        return (NULL);
 
-buf = read_buffer(fd , buf);
-if (buf == NULL) {
-    free(buf);
-return NULL;
-}
-line = extract_line(buf);
-if (line == NULL) {
-    free(line);
-return NULL;
-}
-buf = new_buf(buf);
+    buf = read_buffer(fd , buf);
+    if (buf == NULL) {
+        free(buf);
+        return NULL;
+    }
+    line = extract_line(buf);
+    if (line == NULL) {
+        free(line);
+        return NULL;
+    }
+    buf = new_buf(buf);
 
 
-return (line);
+    return (line);
 }
