@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/02 14:18:29 by aelomari          #+#    #+#             */
+/*   Updated: 2023/12/02 14:47:40 by aelomari         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
-#define BUFFER_SIZE 5
+
 
 char *read_buffer(int fd ,char *buf)
 {
@@ -7,23 +19,33 @@ int read_byte;
 char *readed_buf;
 
 
-readed_buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-if (!readed_buf)
-	return (NULL);
+
+    readed_buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+    if (!readed_buf) {
+        free(buf); // Free buf before returning NULL
+        return (NULL);
+    }
 
 while (1 != 2)
 {
 	read_byte = read(fd, readed_buf, BUFFER_SIZE);
 	if (read_byte == -1)
-		return (NULL);
+	{
+		  free(readed_buf);
+		return (NULL);	
+	}
+
 	readed_buf[read_byte] = '\0';
 	if (read_byte == 0)
 		break;
 buf = ft_strjoin(buf , readed_buf);
+
+
 	if (isnewline(buf))
 		break;
 	
 }
+
 free(readed_buf);
 return (buf);
 
@@ -62,16 +84,16 @@ char *new_buf(char *buf)
 	i = 0;
 		while (buf[i] && buf[i] != '\n')
 		i++;
-		buf_lenght = i;
-		while (buf[buf_lenght])
+		buf_lenght = 0;
+		while (buf[buf_lenght + i])
 		{
 			buf_lenght++;
 		}
-		buf_lenght -= i;
+		
 
-	new = ft_substr(buf, i + 1 , buf_lenght);
-	 free(buf);
-	 return (new);
+    new = ft_substr(buf, i + 1, buf_lenght);
+    free(buf);
+    return (new);
 
 }
 
