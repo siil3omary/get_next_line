@@ -6,7 +6,7 @@
 /*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:18:29 by aelomari          #+#    #+#             */
-/*   Updated: 2023/12/02 14:47:40 by aelomari         ###   ########.fr       */
+/*   Updated: 2023/12/02 15:23:36 by aelomari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,15 @@ char *extract_line(char *buf)
 
 	int i;
 	i = 0;
-	if (!buf || ft_strlen(buf) == 0)
+	if (!buf){
 		return (NULL);
+	}
+		
+	if(!ft_strlen(buf))
+	{
+		return (NULL);
+	}
+
 	while (buf[i] && buf[i] != '\n')
 	i++;
 
@@ -109,8 +116,11 @@ if(fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 
 
 buf = read_buffer(fd , buf);
-if(!buf)
-return (NULL);
+if (buf != NULL) {
+    free(buf);
+    buf = NULL;
+    		return (NULL);
+}
 line = extract_line(buf);
 buf = new_buf(buf);
 
