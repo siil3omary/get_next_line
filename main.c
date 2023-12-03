@@ -7,7 +7,7 @@ int	main(void)
 	char *line;
 
 	fd = open("text.txt", O_RDONLY);
-		// Replace "test.txt" with the path to your test file
+	// Replace "test.txt" with the path to your test file
 	if (fd == -1)
 	{
 		printf("Failed to open the file.\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:18:32 by aelomari          #+#    #+#             */
-/*   Updated: 2023/12/03 18:36:25 by user             ###   ########.fr       */
+/*   Updated: 2023/12/03 20:24:15 by aelomari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,22 @@ size_t	ft_strlen(const char *s)
 	return (lenght);
 }
 
-char *ft_strdup(const char *s)
+char	*ft_strdup(const char *s)
 {
-    char *ptr;
-    size_t i = 0;
+	char	*ptr;
+	size_t	i;
 
-    ptr = (char *)malloc(ft_strlen(s) + 1);
-    if (ptr == NULL)
-        return (NULL);
-    while (s[i] != '\0')
-    {
-        ptr[i] = s[i];
-        i++;
-    }
-    ptr[i] = '\0';
-    return (ptr);
+	i = 0;
+	ptr = (char *)malloc(ft_strlen(s) + 1);
+	if (ptr == NULL)
+		return (NULL);
+	while (s[i] != '\0')
+	{
+		ptr[i] = s[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
 }
 
 static char	*constr(char const *s1, char const *s2)
@@ -78,19 +79,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (result);
 }
 
-int	isnewline(char *buf)
-{
-	int	i;
-
-	i = 0;
-	while (buf[i])
-	{
-		if (buf[i] == '\n')
-			return (1);
-		i++;
-	}
-	return (0);
-}
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	str_len;
@@ -119,4 +107,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	ptr[i] = '\0';
 	return (ptr);
 }
-

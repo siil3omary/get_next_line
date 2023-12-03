@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:18:29 by aelomari          #+#    #+#             */
-/*   Updated: 2023/12/03 18:42:08 by user             ###   ########.fr       */
+/*   Updated: 2023/12/03 20:27:16 by aelomari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,14 @@ char	*read_buffer(int fd, char *buf)
 
 	readed_buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!readed_buf)
-	{
 		return (NULL);
-	}
 	while (1)
 	{
 		read_byte = read(fd, readed_buf, BUFFER_SIZE);
 		if (read_byte == -1)
 		{
-        free(readed_buf);
-        if (buf)
-        {
-            free(buf);
-            buf = NULL;
-        }
-        return (NULL);
+			free(readed_buf);
+			return (NULL);
 		}
 		readed_buf[read_byte] = '\0';
 		if (read_byte == 0)
@@ -59,6 +52,7 @@ char	*read_buffer(int fd, char *buf)
 	}
 	return (buf);
 }
+
 char	*extract_line(char *buf)
 {
 	char	*line;
@@ -132,4 +126,18 @@ char	*get_next_line(int fd)
 	}
 	buf = new_buf(buf);
 	return (line);
+}
+
+int	isnewline(char *buf)
+{
+	int	i;
+
+	i = 0;
+	while (buf[i])
+	{
+		if (buf[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
 }
