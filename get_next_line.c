@@ -6,7 +6,7 @@
 /*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:18:29 by aelomari          #+#    #+#             */
-/*   Updated: 2023/12/03 20:49:19 by aelomari         ###   ########.fr       */
+/*   Updated: 2023/12/03 21:04:14 by aelomari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,12 @@ char	*read_buffer(int fd, char *buf)
 		}
 		readed_buf[read_byte] = '\0';
 		if (read_byte == 0)
-		{
 			break ;
-		}
 		tmp = ft_strjoin(buf, readed_buf);
 		free(buf);
 		buf = tmp;
 		if (isnewline(buf))
-		{
 			break ;
-		}
 	}
 	free(readed_buf);
 	return (buf);
