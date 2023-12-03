@@ -6,7 +6,7 @@
 /*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:18:29 by aelomari          #+#    #+#             */
-/*   Updated: 2023/12/03 21:04:14 by aelomari         ###   ########.fr       */
+/*   Updated: 2023/12/03 21:06:56 by aelomari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,7 @@ char	*read_buffer(int fd, char *buf)
 		read_byte = read(fd, readed_buf, BUFFER_SIZE);
 		if (read_byte == -1)
 		{
-			if (buf)
-			{
-				free(buf);
-				buf = NULL;
-			}
+
 			return (NULL);
 		}
 		readed_buf[read_byte] = '\0';
