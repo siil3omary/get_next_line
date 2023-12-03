@@ -6,7 +6,7 @@
 /*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:18:29 by aelomari          #+#    #+#             */
-/*   Updated: 2023/12/03 20:37:09 by aelomari         ###   ########.fr       */
+/*   Updated: 2023/12/03 20:49:19 by aelomari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char	*read_buffer(int fd, char *buf)
 {
 	char	*readed_buf;
-	char	*tmp;
 	ssize_t	read_byte;
+	char	*tmp;
 
 	readed_buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!readed_buf)
@@ -26,13 +26,16 @@ char	*read_buffer(int fd, char *buf)
 		read_byte = read(fd, readed_buf, BUFFER_SIZE);
 		if (read_byte == -1)
 		{
-			free(readed_buf);
+			if (buf)
+			{
+				free(buf);
+				buf = NULL;
+			}
 			return (NULL);
 		}
 		readed_buf[read_byte] = '\0';
 		if (read_byte == 0)
 		{
-			free(readed_buf);
 			break ;
 		}
 		tmp = ft_strjoin(buf, readed_buf);
@@ -40,10 +43,10 @@ char	*read_buffer(int fd, char *buf)
 		buf = tmp;
 		if (isnewline(buf))
 		{
-			free(readed_buf);
 			break ;
 		}
 	}
+	free(readed_buf);
 	return (buf);
 }
 
