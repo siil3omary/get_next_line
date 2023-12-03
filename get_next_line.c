@@ -3,25 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:18:29 by aelomari          #+#    #+#             */
-/*   Updated: 2023/12/03 16:46:01 by aelomari         ###   ########.fr       */
+/*   Updated: 2023/12/03 18:14:48 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 
-char *read_buffer(int fd ,char *buf)
+char *read_buffer(int fd, char *buf)
 {
-    int read_byte;
     char *readed_buf;
     char *tmp;
+    ssize_t read_byte;
 
     readed_buf = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
     if (!readed_buf) {
-
         return (NULL);
     }
 
@@ -36,19 +35,28 @@ char *read_buffer(int fd ,char *buf)
 
         readed_buf[read_byte] = '\0';
         if (read_byte == 0)
+        {
+            free(readed_buf);
             break;
+        }
         tmp = ft_strjoin(buf , readed_buf);
-      
+        if (!tmp) {
+            free(buf);
+            free(readed_buf);
+            return (NULL);
+        }
+        free(buf);
         buf = tmp;
-free(tmp);
+
         if (isnewline(buf))
+        {
+            free(readed_buf);
             break;
+        }
     }
 
-    free(readed_buf);
     return buf;
 }
-
 char *extract_line(char *buf)
 {
 	char *line;
@@ -68,6 +76,8 @@ char *extract_line(char *buf)
 	i++;
 
 	line = ft_substr(buf, 0, i + 1);
+	if(!line)
+		return (NULL);
 	return (line);
 	
 }
@@ -113,6 +123,11 @@ char *get_next_line(int fd)
     if (buf == NULL) {
         free(buf);
         return NULL;
+    }
+    if(!*buf)
+    {
+	   free(buf);
+	   return (NULL);
     }
     line = extract_line(buf);
     if (line == NULL) {

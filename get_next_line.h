@@ -23,7 +23,7 @@
 # ifndef MAX_FD
 # define MAX_FD 1024
 # endif // !MAX_FD
-# define SIZE_MAX 18446744073709551615UL
+
 
 char *get_next_line(int fd);
 size_t	ft_strlen(const char *s);
