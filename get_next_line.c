@@ -6,7 +6,7 @@
 /*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:18:29 by aelomari          #+#    #+#             */
-/*   Updated: 2023/12/04 19:57:36 by aelomari         ###   ########.fr       */
+/*   Updated: 2023/12/04 22:43:17 by aelomari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char	*get_next_line(int fd)
 	static char	*buf = NULL;
 
 	line = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, buf, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0   || BUFFER_SIZE > SIZE_MAX|| read(fd, buf, 0) < 0)
 		return (NULL);
 	buf = read_buffer(fd, buf);
 	if (buf == NULL)
