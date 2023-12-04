@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user <user@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:18:32 by aelomari          #+#    #+#             */
-/*   Updated: 2023/12/03 20:24:15 by aelomari         ###   ########.fr       */
+/*   Updated: 2023/12/04 14:59:55 by user             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char	*ft_strdup(const char *s)
 	size_t	i;
 
 	i = 0;
+
 	ptr = (char *)malloc(ft_strlen(s) + 1);
 	if (ptr == NULL)
 		return (NULL);
