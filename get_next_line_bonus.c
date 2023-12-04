@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 14:18:29 by aelomari          #+#    #+#             */
-/*   Updated: 2023/12/04 14:31:54 by aelomari         ###   ########.fr       */
+/*   Updated: 2023/12/04 14:37:26 by aelomari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*read_buffer(int fd, char *buf)
 {
@@ -102,28 +102,28 @@ int	isnewline(char *buf)
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*buf = NULL;
+	static char	*buf[MAX_FD] = {NULL};
 
 	line = NULL;
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, buf, 0) < 0)
+	if (fd < 0 || fd >= MAX_FD || BUFFER_SIZE <= 0)
 		return (NULL);
-	buf = read_buffer(fd, buf);
-	if (buf == NULL)
+	buf[fd] = read_buffer(fd, buf[fd]);
+	if (buf[fd] == NULL)
 	{
-		free(buf);
+		free(buf[fd]);
 		return (NULL);
 	}
-	if (!*buf)
+	if (!*buf[fd])
 	{
-		free(buf);
+		free(buf[fd]);
 		return (NULL);
 	}
-	line = extract_line(buf);
+	line = extract_line(buf[fd]);
 	if (line == NULL)
 	{
 		free(line);
 		return (NULL);
 	}
-	buf = new_buf(buf);
+	buf[fd] = new_buf(buf[fd]);
 	return (line);
 }
