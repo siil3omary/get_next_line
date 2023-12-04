@@ -84,7 +84,7 @@ char	*get_next_line(int fd)
     static char	*buf[MAX_FD] = {NULL};
 
     line = NULL;
-    if (fd < 0 || fd >= MAX_FD || BUFFER_SIZE <= 0)
+    if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > SIZE_MAX || fd > MAX_FD)
         return (NULL);
     buf[fd] = read_buffer(fd, buf[fd]);
     if (buf[fd] == NULL)
