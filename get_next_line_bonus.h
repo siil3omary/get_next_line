@@ -6,7 +6,7 @@
 /*   By: aelomari <aelomari@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 14:32:13 by aelomari          #+#    #+#             */
-/*   Updated: 2023/12/04 16:11:17 by aelomari         ###   ########.fr       */
+/*   Updated: 2023/12/04 17:02:41 by aelomari         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #  define BUFFER_SIZE 5
 # endif
 # ifndef MAX_FD
-#define MAX_FD 1024
+#define MAX_FD 10
 # endif // !MAX_FD
 
 char	*get_next_line(int fd);
